@@ -12,10 +12,14 @@ app.use(cookieParser());
 const authRoutes = require("./routes/userRoutes");
 const testClientRoutes = require("./routes/clientTestRoutes");
 const testAdminRoutes = require("./routes/adminTestRoutes");
+const scaleRoutes = require("./routes/scaleRoutes");
+const itemRoutes = require("./routes/itemRoutes");
 
 app.use("/", authRoutes);
 app.use("/tests", testClientRoutes);
 app.use("/admin/tests", testAdminRoutes);
+app.use("/tests/:testId/scales", scaleRoutes);
+app.use("/tests/:testId/scales/:scaleId?", itemRoutes);
 
 const PORT = process.env.PORT || 5000;
 
