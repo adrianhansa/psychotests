@@ -7,7 +7,7 @@ const register = async (req, res) => {
     const { name, email, password, passwordVerify } = req.body;
     if (!email || !name || !password)
       return res.status(400).json({ message: "All fields are required." });
-    if (password.length <= 6)
+    if (password.length < 6)
       return res
         .status(400)
         .json({ message: "The password must contain at least 6 characters." });
