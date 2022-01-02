@@ -8,7 +8,7 @@ const {
   deleteItem,
 } = require("../controllers/itemsController");
 
-router.get("/", getItems);
+router.get("/:testId", getItems);
 router.post("/:testId", auth, addItem);
 router.get("/:id", auth, getItem);
 router.put("/:id", auth, updateItem);
