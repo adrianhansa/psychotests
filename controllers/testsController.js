@@ -31,7 +31,7 @@ const addTest = async (req, res) => {
 
 const getTestForClient = async (req, res) => {
   try {
-    const test = await Test.findOne(req.params.slug);
+    const test = await Test.findOne({ slug: req.params.slug });
     if (!test) return res.status(404).json({ message: "Test not found" });
     res.status(200).json(test);
   } catch (error) {
@@ -72,9 +72,23 @@ const updateTest = async (req, res) => {
     const { name, description } = req.body;
     if (!name || !description)
       return res.status(400).json({ message: "All fields are required." });
+    const slug = slugify(name, {
+      lower: true,
+      trim: true,
+      remove: /[*+~.()'"!?:@]/g,
+    });
+    //check for existing tests with the same slug
+    const existingTest = await Test.findOne({ slug });
+    if (existingTest)
+      return res
+        .status(400)
+        .json({
+          message:
+            "Please choose a different name, this one is already in use.",
+        });
     const test = await Test.findByIdAndUpdate(
       req.params.id,
-      { name, password },
+      { name, description, slug },
       { new: true }
     );
     if (!test) return res.status(404).json({ message: "Test not found" });

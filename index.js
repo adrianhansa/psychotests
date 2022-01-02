@@ -10,10 +10,12 @@ app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 app.use(cookieParser());
 
 const authRoutes = require("./routes/userRoutes");
-const testRoutes = require("./routes/testRoutes");
-const auth = require("./middlewares/auth");
+const testClientRoutes = require("./routes/clientTestRoutes");
+const testAdminRoutes = require("./routes/adminTestRoutes");
+
 app.use("/", authRoutes);
-app.use("/tests", testRoutes);
+app.use("/tests", testClientRoutes);
+app.use("/admin/tests", testAdminRoutes);
 
 const PORT = process.env.PORT || 5000;
 
