@@ -9,9 +9,9 @@ const {
 } = require("../controllers/itemsController");
 
 router.get("/", getItems);
-router.post("/", auth, addItem);
+router.post("/:testId", auth, addItem);
 router.get("/:id", auth, getItem);
 router.put("/:id", auth, updateItem);
-router.delete("/:id", deleteItem);
+router.delete("/:id", auth, deleteItem);
 
 module.exports = router;
