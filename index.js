@@ -9,7 +9,10 @@ app.use(express.json());
 app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 app.use(cookieParser());
 
+const authRoutes = require("./routes/userRoutes");
 const testRoutes = require("./routes/testRoutes");
+const auth = require("./middlewares/auth");
+app.use("/", authRoutes);
 app.use("/tests", testRoutes);
 
 const PORT = process.env.PORT || 5000;
