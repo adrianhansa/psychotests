@@ -19,14 +19,14 @@ app.use("/", authRoutes);
 app.use("/tests", testClientRoutes);
 app.use("/admin/tests", testAdminRoutes);
 app.use("/tests/:testId/scales", scaleRoutes);
-app.use("/tests/:testId/scales/:scaleId?", itemRoutes);
+app.use("/tests/:testId/items", itemRoutes);
 
 const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.DB_CONNECTION)
   .then(() => {
-    console.log("DB connected to Mongodb Atlas.");
+    console.log("Connected to Mongodb Atlas.");
     app.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
     });

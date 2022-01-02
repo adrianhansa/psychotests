@@ -8,10 +8,10 @@ const {
   deleteScale,
 } = require("../controllers/scalesController");
 
-router.get("/", getScales);
 router.post("/", auth, addScale);
 router.get("/:id", auth, getScale);
 router.put("/:id", auth, updateScale);
 router.delete("/:id", deleteScale);
+router.get("/:slug", getScales);
 
 module.exports = router;
